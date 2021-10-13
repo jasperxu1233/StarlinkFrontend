@@ -4,13 +4,13 @@ import {Form, Button, InputNumber} from 'antd';
 class SatSettingForm extends Component {
 
     render() {
-        const {getFieldDecorator} = this.props.form;
+        const {getFieldDecorator} = this.props.form; //通过Form.create（）得到的form
         const formItemLayout = {
-            labelCol: {
+            labelCol: { //标签布局，大小控制
                 xs: { span: 24 },
                 sm: { span: 11 },
             },
-            wrapperCol: {
+            wrapperCol: {  //输入布局 大小控制
                 xs: { span: 24 },
                 sm: { span: 13 },
             },
@@ -102,7 +102,6 @@ class SatSettingForm extends Component {
         );
     }
 
-     // 这里问下老师，这里在干什么，props哪里传入的？
     showSatellite = e => {  //e传入防止触发网页做default事件，否则可能会崩溃
         e.preventDefault();
         this.props.form.validateFields((err, values) => { //validate输入的信息
@@ -114,7 +113,7 @@ class SatSettingForm extends Component {
     }
 }
 
-// 这里问下老师，这里在干什么，mei看懂
+//antd3的写法，装饰这个satsetting
 const SatSetting1 = Form.create({name: 'satellite-setting'})(SatSettingForm)
 
 export default SatSetting1;

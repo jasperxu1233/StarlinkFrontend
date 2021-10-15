@@ -1,16 +1,49 @@
 import React, {Component} from 'react';
-import {Avatar, Button, Checkbox, List, Spin} from 'antd';
-import satellite from "../assets/images/spacex_logo.svg";
+import { List, Avatar, Button, Checkbox, Spin } from 'antd';
+import satellite from "../assets/images/satellite.svg";
 
 class SatelliteList extends Component {
+    state = {
+        selected : [],
+    }
+
+    onChange = (e) => { //传入一个e
+        const { dataInfo, checked } = e.target;  //点一下得到checkbox的状态以及信息
+        const { selected } = this.state;
+        const list = this.addOrRemove(dataInfo, checked, selected);
+        this.setState({
+            selected: list
+        })
+    }
+
+    addOrRemove = (item, status, list) => {
+        const found = list.some((entry) => entry.satid === item.satid);
+        if(status && !found){ //如果用户选中，切选的那个不在已选中的里面则加进去
+            list.push(item)
+        }
+
+        if(!status && found){//如果用户取消，切选的那个在已选中的里面则取消掉
+            list = list.filter( entry => {
+                return entry.satid !== item.satid;
+            });
+        }
+        return list;
+
+    }
+
+
     render() {
-        const satList = this.props.satInfo ? this.props.satInfo.above : [];
+        const satList = this.props.satInfo ? this.props.satInfo.above : []; //全部的卫星数据
         const { isLoad } = this.props;  //解构拿到isLoad的数据。
+        const { selected } = this.state;
 
         return (
             <div className="sat-list-box">
                 <Button className="sat-list-btn"
-                        size="large">Track on the map</Button>
+                        size="large"
+                        disabled={ selected.length === 0}
+                        onClick={this.onShowSatMap}
+                >Track on the map</Button>
                 <hr/>
                 {
                     isLoad ? //通过isLoad状态得到展示前一个还是后一个标签的目的

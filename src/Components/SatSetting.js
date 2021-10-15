@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Form, Button, InputNumber} from 'antd';
 
-class SatSettingForm extends Component {
+class SatSettingForm extends Component {  //setsetting负责展示，表单收集用户填入的数据
 
     render() {
         const {getFieldDecorator} = this.props.form; //通过Form.create（）得到的form

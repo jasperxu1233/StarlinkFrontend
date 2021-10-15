@@ -1,4 +1,4 @@
-.sat-list-box {
+.sat-list-box{
     padding: 10px;
     border: 2px solid #ccc;
     margin-top: 10px;
@@ -13,18 +13,14 @@
     color: #fff;
 }
 
-.btn-container {
-    text-align: center;
-}
-
 .sat-list {
-    height: 300px;
+    height: 335px;
     overflow: auto;
 }
 
 .spin-box {
-    display: flex;
+    height: 370px;
+    display:flex;
     align-items: center;
     justify-content: center;
-    height: 335px;
 }

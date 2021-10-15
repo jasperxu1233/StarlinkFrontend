@@ -1,24 +1,22 @@
-import React, {Component} from 'react';
-import { Row, Col } from 'antd';
-import SatSetting from './SatSetting';
-import SatelliteList from './SatelliteList';
+import React, { Component } from "react";
+import { Row, Col } from "antd";
 import axios from "axios";
-import {NEARBY_SATELLITE, SAT_API_KEY, STARLINK_CATEGORY} from "../constants";
+import SatSetting from "./SatSetting";
+import SatelliteList from "./SatelliteList";
+import WorldMap from "./WorldMap";
+import { NEARBY_SATELLITE, SAT_API_KEY, STARLINK_CATEGORY } from "../constants";
 
 class Main extends Component {
-    state = {
-        satInfo : null,
-        settings : null,
-        isLoadingList: false
+    constructor() {
+        super();
+        this.state = {
+            satInfo: null,
+            isLoadingList: false,
+        };
     }
-
-
     showNearbySatellite = (setting) => {
-        this.setState({
-            settings: setting
-        })
         this.fetchSatellite(setting);
-    }
+    };
 
     fetchSatellite = (setting) => {
         const {latitude, longitude, elevation, altitude} = setting;
@@ -46,18 +44,21 @@ class Main extends Component {
             })
     }
 
+    showMap = () => {
+        console.log("show on the map");
+    };
+
     render() {
+        const { satInfo } = this.state;
         return (
-            <Row className='main'>
-                <Col span={10} className="left-side">
-                    <SatSetting onShow={this.showNearbySatellite}/>
-                    <SatelliteList
-                        satInfo={this.state.satInfo}
-                        isLoad={this.state.isLoadingList}
+            <Row className="main">
+                <Col span={8} className="left-side">
+                    <SatSetting onShow={this.showNearbySatellite} />
+                    <SatelliteList satInfo={satInfo} onShowMap={this.showMap} isLoad={this.state.isLoadingList}
                     />
                 </Col>
-                <Col span={14} className="right-side">
-                    right
+                <Col span={16} className="right-side">
+                    <WorldMap />
                 </Col>
             </Row>
         );

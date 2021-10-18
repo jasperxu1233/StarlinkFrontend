@@ -54,7 +54,7 @@ class Main extends Component {
 
     showMap = (selected) => {  //选中的卫星作存储到satList，得到选中的卫星的array，作为参数传入函数。
         this.setState((preState) => ({
-           ...preState, //preState使得之前的结果不会被覆盖
+           ...preState, //preState使得之前的结果不会被覆盖，即在之前的基础上作操作。
            satList : [...selected],  //setState引起rerender，导致下面的satList的值重新改变。
         }))
     };
